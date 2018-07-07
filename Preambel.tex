@@ -1,0 +1,187 @@
+\documentclass[
+	pdftex,
+	fontsize=12pt,
+	paper=a4,
+	parskip=half,
+	twoside=false,
+	numbers=noenddot,	% Kein Punkt am Ende einer Überschrift
+	%draft=true,			% Deckt Schwächen auf: overfull und full boxes werden markiert; Bilder werden nicht geladen
+	bibliography=totoc,	% Literaturverzeichnis ins Inhaltsverzeichnis aufnehmen
+	listof=totoc,		% Tabellen- und Abbildungsverzeichnis ins Inhaltsverzeichnis aufnehmen
+	titlepage=true,		% Separate Titelseite; Gestaltung mit Hilfe der Titlepage-Umgebung
+	headsepline=true,	% Kopflinie aktivieren
+	footsepline=true,	% Fußlinie aktivieren
+	abstracton			% Abstract aktivieren
+]{scrreprt}
+
+% Abstand zwischen Überschrift und Text
+%evtl... 
+
+% Absatzgröße:
+\setlength{\parskip}{6pt}
+
+% Zeichenkodierung Input ist UTF-8: Umlaute können direkt eingegeben werden
+\usepackage[utf8]{inputenc}
+
+% nötig für tabelle (Im Titelblatt!)
+\usepackage{longtable}
+
+% variabel breite tabellen
+\usepackage{tabularx}
+
+% Fußnoten in Tab
+\usepackage{tablefootnote}
+
+\usepackage{caption}
+
+% Zeichenkodierung Ausgabe ist T1-Kodierung: Wichtig für die Ausgabe von Umlauten
+\usepackage[T1]{fontenc}
+
+% Schrift festlegen
+\usepackage{lmodern}
+
+% Sprachauswahl für Lokalisierungen und Silbentrennung
+\usepackage[ngerman, english]{babel}
+
+% Zitate: Anführungszeichen automatisch anhand der Sprache wählen
+\usepackage[babel=true]{csquotes}
+
+% Source-Code-Listings
+\usepackage{listings}
+\lstset{numberbychapter=false}
+%\lstset{language=SQL}
+
+% BibTeX-Symbol etc.
+\usepackage{texnames}
+
+%Euro-Symbol
+\usepackage{eurosym}
+
+%Mathematische Symbole
+\usepackage{amssymb}
+
+% (Schrift-) Farben ändern
+\usepackage{xcolor}
+
+% Symbole, z.B. Haken
+%\usepackage{pifont}
+
+% Mathe-definitionen
+%\usepackage{amsthm}
+
+% Zeilen in Tabellen zusammenfassen
+%\usepackage{multirow}
+
+% Silbentrennung kann bei bestimmten Wörten mit Hilfe von diesem Paket deaktiviert werden 
+%\usepackage{hyphenat}
+
+% Abkürzungsverzeichnis
+%option printonly used + withpage gibt auch die Seitenzahlen an
+\usepackage[printonlyused]{acronym}
+% Abstand mit Punkten füllen - VERALTET NICHT MEHR UNTERSÜTZT!
+%\newcommand*\bflabel[1]{\textbf{\normalsize{#1}}\hfill}
+
+% Punkte im Inhaltsverzeichnis
+\usepackage{tocstyle}
+\usetocstyle{allwithdot}
+
+% Zum Einbinden von PDF-Dateien.
+%\usepackage{pdfpages}
+
+% Paket zum Anpassen von Kopf- und Fußzeilen
+\usepackage[plainfootsepline, plainheadsepline, headsepline, footsepline, automark]{scrpage2}
+
+% Liniendicke
+\setheadsepline{0.1pt}
+\setfootsepline{0.1pt}
+
+% Kopf- und Fusszeile löschen
+\clearscrheadfoot
+% Kopf- und Fusszeile aktivieren
+\pagestyle{scrheadings}
+
+% Kopf links
+\ihead[\titel]{\titel}
+
+% Fuss links
+\ifoot[\verfasser]{\verfasser}
+% Fuss rechts
+\ofoot[\pagemark]{\pagemark}
+
+% Grafiken einbinden
+\usepackage{graphicx}
+% Pfad zu den Grafiken
+\graphicspath{{Figures/}}
+
+% Seitenränder setzen
+\usepackage[left=3.5cm, right=2.5cm, top=2.5cm, bottom=2cm, footskip=1.25cm]{geometry}
+
+% Zeilenabstand auf 1.5 setzen
+\usepackage{setspace}
+\onehalfspacing
+
+% Literaturverzeichnis
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+%für Umbrüche: block=ragged
+\addbibresource{Bibliography/Bibliography.bib}
+
+% Glossar
+%\usepackage[toc,nonumberlist]{glossaries}
+
+% Titel als Referenzierung verwenden
+\usepackage{titleref}
+
+% Währungen
+%\usepackage{textcomp}
+
+% Fussnoten und Bilder fortlaufend nummerieren.
+\usepackage{chngcntr}
+\counterwithout{table}{chapter}
+\counterwithout{figure}{chapter}
+
+% Persönliche Daten
+\newcommand{\titel}{Mein Titel}
+%\newcommand{\untertitel}{}
+\newcommand{\art}{Art der Arbeit}
+\newcommand{\verfasser}{Verfasser}
+\newcommand{\kurs}{Kurs oder sowas}
+\newcommand{\ausbildungsbetrieb}{rauchst du wahrscheinlich nichtb}%, Dietmar-Hopp-Allee 16, 69190 Walldorf}
+\newcommand{\abgabedatum}{Datum}
+
+\newcommand{\martrikelnr}{Matrikelnummer}
+\newcommand{\wissenschaftlBetreuer}{asdf}
+\newcommand{\betrieblBetreuer}{asdf}
+\newcommand{\zeitraum}{13.02.2017 -- 22.05.2017}
+
+% Links- und PDF-Einstellungen
+\usepackage[breaklinks, bookmarksopen=true, pdfpagelabels]{hyperref}
+\hypersetup{
+	pdfauthor = {\verfasser},
+	pdftitle = {\titel},
+	pdfsubject = {\art},
+	pdfkeywords = {},
+	pdfstartview = {Fit},
+	colorlinks = {false}
+}
+
+% Verhinderung von Schusterjunge und Hurenkind
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Seitenzäler für große, römische Zahlen
+\newcounter{RomanPagenumber}
+
+% Abkürzungen
+%\newcommand{\dash}{d.\,h.}
+%\newcommand{\zB}{z.\,B.}
+
+%Beispielseite mit Rändern und Größen
+%kann mit "\layout" in das document eingefügt werden
+\usepackage{layout}
+
+%Zeigt Boxen an:
+%\usepackage{showframe}
+
+%Für PSTricks
+%\usepackage{pstricks}
